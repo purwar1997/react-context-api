@@ -1,25 +1,22 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import { ThemeContext, CreateUserContext } from './Context';
+import Panel from './components/Panel';
+import ThemeToggler from './components/ThemeToggler';
 import './App.css';
+import './Themes.css';
 
-function App() {
+export default function App() {
+  const [theme, setTheme] = useState('light');
+  const [user, setUser] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        <CreateUserContext.Provider value={{ user, setUser }}>
+          <Panel title="Welcome" />
+        </CreateUserContext.Provider>
+        <ThemeToggler />
+      </ThemeContext.Provider>
+    </>
   );
 }
-
-export default App;
